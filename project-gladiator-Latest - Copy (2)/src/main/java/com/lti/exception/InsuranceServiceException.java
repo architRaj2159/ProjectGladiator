@@ -1,29 +1,29 @@
 package com.lti.exception;
 
-public class BuyInsuranceServiceException extends Exception {
+public class InsuranceServiceException extends Exception {
 
-	public BuyInsuranceServiceException() {
+	public InsuranceServiceException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public BuyInsuranceServiceException(String message, Throwable cause, boolean enableSuppression,
+	public InsuranceServiceException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
 	}
 
-	public BuyInsuranceServiceException(String message, Throwable cause) {
+	public InsuranceServiceException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public BuyInsuranceServiceException(String message) {
+	public InsuranceServiceException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 
-	public BuyInsuranceServiceException(Throwable cause) {
+	public InsuranceServiceException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}

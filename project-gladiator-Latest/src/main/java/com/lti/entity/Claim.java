@@ -3,8 +3,10 @@ package com.lti.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,31 +21,31 @@ import javax.persistence.Table;
 public class Claim {
 
 	@Id
-	@SequenceGenerator(name = "id", initialValue = 1, allocationSize = 1)
+	@SequenceGenerator(name = "claim_id", initialValue = 1, allocationSize = 1)
 	@GeneratedValue
 	private int id;
 
-	@Column(name = "date", nullable = false)
+	@Column(name = "claim_date")
 	private LocalDate date;
 
-	@Column(name = "status", nullable = false)
-	private String status;
+	@Column(name = "status")
+	private String status;//approved or pending, not approved 
 
-	@Column(name = "amount", nullable = false)
+	@Column(name = "amount")
 	private double amount;
 
-	@Column(name = "reason", nullable = false)
+	@Column(name = "reason")
 	private String reason;
 
-	@Column(name = "contact_no", nullable = false)
-	private int contactNo;
-
-	@ManyToOne
+	@Column(name = "contact_no")
+	private long contactNo;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
-	@OneToOne()
-	@JoinColumn(name = "id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "policy_id")
 	private Policy policy;
 
 	public Policy getPolicy() {
@@ -94,12 +96,12 @@ public class Claim {
 		this.reason = reason;
 	}
 
-	public int getContactNo() {
+	public long getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(int contactNo) {
-		this.contactNo = contactNo;
+	public void setContactNo(long l) {
+		this.contactNo = l;
 	}
 
 	public Customer getCustomer() {

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,39 +20,41 @@ public class Vehicle {
 	
 	
 	@Id
-	@SequenceGenerator(name = "id", initialValue = 1, allocationSize=1)
+	@SequenceGenerator(name = "vehicle_id", initialValue = 1, allocationSize=1)
 	@GeneratedValue
 	private int id;
 	
-	@Column(name = "type", nullable=false)
+	@Column(name = "vehicle_type")
 	private String type;
 	
-	@Column(name = "model", nullable=false)
+	@Column(name = "model")
 	private String model;
 	
-	@Column(name = "manufacture", nullable=false)
-	private String manufacture;
+	@Column(name = "manufacturer")
+	private String manufacturer;
 	
-	@Column(name = "driving_license", nullable=false)
+	@Column(name = "driving_license", unique = true)
 	private String drivingLicense;
 	
-	@Column(name = "purchase_date", nullable=false)
+	@Column(name = "purchase_date")
 	private LocalDate purchaseDate;
 	
-	@Column(name = "registration_no", nullable=false)
+	@Column(name = "registration_no", unique = true)
 	private String registrationNo;
 	
-	@Column(name = "engine_no", nullable=false)
+	@Column(name = "engine_no",unique = true)
 	private String engineNo;
 	
-	@Column(name = "chassis_number", nullable=false)
+	@Column(name = "chassis_no", unique = true)
 	private String chassisNo;
 	
-	@Column(name = "engine_type", nullable=false)
-	private String engineType;
-	//private int customerNo;  --fk
+	@Column(name = "engine_type")
+	private String engineType;  //petrol/diesel
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@Column(name = "last_renew_date")
+	private LocalDate lastRenewDate;
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
@@ -62,6 +65,15 @@ public class Vehicle {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+	
+	public LocalDate getLastRenewDate() {
+		return lastRenewDate;
+	}
+
+	public void setLastRenewDate(LocalDate lastRenewDate) {
+		this.lastRenewDate = lastRenewDate;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -80,11 +92,11 @@ public class Vehicle {
 	public void setModel(String model) {
 		this.model = model;
 	}
-	public String getManufacture() {
-		return manufacture;
+	public String getManufacturer() {
+		return manufacturer;
 	}
-	public void setManufacture(String manufacture) {
-		this.manufacture = manufacture;
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 	public String getDrivingLicense() {
 		return drivingLicense;
